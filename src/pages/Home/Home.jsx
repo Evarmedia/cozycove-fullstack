@@ -1,10 +1,11 @@
 import AOS from "aos";
-import React from 'react';
+import React, { useEffect } from 'react';
 import Banner from '../Banner/Banner';
 import Hero from "../Hero/Hero";
 import Products from '../ProductDetails/Products';
 import img1 from '../../assets/tmpAssets/child2.png'
 import img2 from '../../assets/tmpAssets/man2.png'
+// import { useEffect } from "react";
 
 
 const BannerData = {
@@ -34,7 +35,7 @@ const BannerData2 = {
 const Home = () => {
 
 // Effect for AOS 
-  React.useEffect(() => {
+  useEffect(() => {
     AOS.init({
       duration: 800,
       easing: "ease-in-sine",

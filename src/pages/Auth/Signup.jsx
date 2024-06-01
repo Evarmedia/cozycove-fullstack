@@ -65,7 +65,7 @@ const Signup = () => {
       };
     //   setLoading(true)
       axios
-      .post("http://localhost:3005/api/product/auth/register", data)
+      .post("http://localhost:3005/api/auth/register", data)
       .then((res) => {
         toast.success(res.data.message);
         setFirstname("");

@@ -76,34 +76,16 @@ const About = () => {
             </p>
             <div>
               <h1 className="text-2xl text-center font-semibold text-red-700 mb-4">
-                Meet the Development Team
+                Meet the Developer
               </h1>
               <div className="flex sm:gap-5 flex-wrap justify-center">
                 <Contributor
-                  imgSrc="https://placehold.co/600x400"
-                  name="Celestine Wangechi"
-                  description="Backend Developer"
-                  linkedin="https://www.linkedin.com/in/johndoe"
-                  github="https://github.com/johndoe"
-                  twitter="https://twitter.com/johndoe"
-                />
-
-                <Contributor
                   imgSrc={contributor1Img}
                   name="Mishak Mosimabale"
-                  description="FrontEnd Developer"
+                  description="FullStack Developer"
                   linkedin="https://www.linkedin.com/in/mishak-mosimabale"
                   github="https://github.com/Evarmedia"
                   twitter="https://twitter.com/mosicodes"
-                />
-
-                <Contributor
-                  imgSrc="https://placehold.co/600x400"
-                  name="Taiwo Taiwo"
-                  description="Devops"
-                  linkedin="https://www.linkedin.com/in/taiwo-taiwo-0b5953241"
-                  github="https://github.com/Dot-Tee"
-                  twitter="https://x.com/TaiwoOladotun6"
                 />
               </div>
             </div>

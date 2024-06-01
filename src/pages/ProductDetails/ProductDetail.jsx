@@ -8,9 +8,14 @@ import RecommendedProducts from "./RecommendedProducts";
 const ProductDetail = () => {
   const { productId } = useParams(); 
   const [product, setProduct] = useState(null);
-
+  const token = localStorage.getItem('token');
+  
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/product/${productId}`)
+    axios.get(`http://localhost:3005/api/product/${productId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then(res => {
         setProduct(res.data);
         // console.log(res.data);
@@ -129,7 +134,7 @@ const ProductDetail = () => {
         </div>
       )}
       {/* Recommended products section */}
-      <h1 className="font-semibold text-3xl sm:text-4xl my-5">
+      <h1 className="font-semibold text-center text-3xl sm:text-4xl my-5">
         Recommended For You
       </h1>
       <RecommendedProducts />

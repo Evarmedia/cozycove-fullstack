@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+
 const MenuLinks = [
   {
     id: 1,
     name: "Home",
-    link: "/",
+    link: "/home",
   },
   {
     id: 2,
@@ -28,27 +29,22 @@ const DropdownLinks = [
   {
     id: 1,
     name: "Trending Products",
-    link: "trending",
+    link: "/categories/trending",
   },
   {
     id: 2,
-    name: "Best Selling",
-    link: "bestselling",
+    name: "Men Fashion",
+    link: "/categories/men",
   },
   {
     id: 3,
-    name: "Men Fashion",
-    link: "men",
+    name: "Women Fashion",
+    link: "/categories/women",
   },
   {
     id: 4,
-    name: "Women Fashion",
-    link: "women",
-  },
-  {
-    id: 3,
     name: "Children Fashion",
-    link: "children",
+    link: "/categories/children",
   },
 ];
 

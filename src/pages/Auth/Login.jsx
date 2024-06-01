@@ -17,10 +17,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { NavLink, Link} from "react-router-dom";
-
-
-
+import { NavLink, Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -31,7 +28,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color='inherit' href='https://mui.com/'>
+      <Link color='inherit'>
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -49,21 +46,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       email,
       password,
     };
     axios
-      .post("http://localhost:3005/api/product/auth/login", data)
+      .post("http://localhost:3005/api/auth/login", data)
       .then((res) => {
         // console.log(data);
         // console.log(res.data);
+        //Store token and user information
+        
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
+
         toast.success(res.data.message);
+        //redirect to home
         setTimeout(() => {
           navigate("/home");
-        }, 1000);
+        }, 1500);
 
         setEmail("");
         setPassword("");
@@ -140,12 +143,20 @@ const Login = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <NavLink to='/forgotpassword' variant='body2' className='text-red-500 hover:text-gray-500'>
+                <NavLink
+                  to='/forgotpassword'
+                  variant='body2'
+                  className='text-red-500 hover:text-gray-500'
+                >
                   Forgot password?
                 </NavLink>
               </Grid>
               <Grid item>
-                <Link to='/' variant='body2' className='text-red-500 hover:text-gray-500'>
+                <Link
+                  to='/'
+                  variant='body2'
+                  className='text-red-500 hover:text-gray-500'
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

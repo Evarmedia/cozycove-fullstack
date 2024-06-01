@@ -65,9 +65,9 @@ const Footer = () => {
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores
               alias cum
             </p>
-            <p className="text-gray-500 mt-4">Our Ecom Project for ALX</p>
+            <p className="text-gray-500 mt-4">My Ecommerce Store For Univelcity-Talent for StartUp</p>
             <a
-              href="https://github.com/Evarmedia/cozycove"
+              href="https://github.com/Evarmedia/cozycove-node"
               target="_blank"
               className="inline-block bg-primary/90 text-white py-2 px-4 mt-4 text-sm rounded-full"
             >

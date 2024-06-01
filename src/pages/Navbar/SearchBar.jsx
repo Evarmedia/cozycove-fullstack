@@ -1,38 +1,29 @@
-// import React from 'react'
-
-import { useState } from "react";
+import React, { useContext } from 'react';
 import { IoMdSearch } from "react-icons/io";
+import { SearchContext } from '../../contexts/SearchContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const SearchBar = () => {
-  const [input, SetInput] = useState("");
+  const { setSearchTerm } = useContext(SearchContext);
 
-  const fetchData = (value) => {
-    fetch("http://localhost:4000/products")
-      .then((response) => response.json())
-      .then((json)=> {
-        const results = json.filter((product) => {
-          return value && product && product.title && (product.title.toLowerCase().includes(value) || product.title.toUpperCase().includes(value));
-        })
-        console.log(results)
-      });
-  };
 
-  const handleSearch = (value) => {
-    SetInput(value);
-    fetchData(value);
+    // function that handles the search
+    const handleSearch = (event) => {
+      setSearchTerm(event.target.value);
+      // navigate("/search");
   };
 
   return (
-    <div className="relative group hidden sm:block w-full">
-      <input
-        type="text"
-        placeholder="Search"
-        className="search-bar"
-        value={input}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-      <IoMdSearch className="text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200" />
-    </div>
+    <div className='relative group hidden sm:block w-full'>
+    <input
+      type='text'
+      placeholder='Search'
+      className='search-bar'
+      onChange={handleSearch}
+    />
+    <IoMdSearch className='text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200' />
+  </div>
   );
 };
 
