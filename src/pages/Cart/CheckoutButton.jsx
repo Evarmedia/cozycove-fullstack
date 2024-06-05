@@ -2,7 +2,7 @@
 
 const CheckoutButton = () => {
   return (
-    <div>CheckoutButton</div>
+    <buton>CheckoutButton</buton>
   )
 }
 

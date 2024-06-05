@@ -1,12 +1,11 @@
 import AOS from "aos";
-import React, { useEffect } from 'react';
-import Banner from '../Banner/Banner';
+import React, { useEffect } from "react";
+// import Banner from "../Banner/Banner";
 import Hero from "../Hero/Hero";
-import Products from '../ProductDetails/Products';
-import img1 from '../../assets/tmpAssets/child2.png'
-import img2 from '../../assets/tmpAssets/man2.png'
+import Products from "../ProductDetails/Products";
+import img1 from "../../assets/tmpAssets/child2.png";
+import img2 from "../../assets/tmpAssets/man2.png";
 // import { useEffect } from "react";
-
 
 const BannerData = {
   discount: "30% OFF",
@@ -33,8 +32,7 @@ const BannerData2 = {
 };
 
 const Home = () => {
-
-// Effect for AOS 
+  // Effect for AOS
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -45,15 +43,16 @@ const Home = () => {
     AOS.refresh();
   }, []);
 
-
   return (
-    <main className="px-4 duration-200">        
+    <main className='px-4 duration-200'>
+      <div className="hidden md:block">
         <Hero />
-        <Products />
-        <Banner data={BannerData}/>
-        <Banner data={BannerData2}/>
+      </div>
+      <Products />
+      {/* <Banner data={BannerData} /> */}
+      {/* <Banner data={BannerData2} /> */}
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

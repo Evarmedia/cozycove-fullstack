@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa";
+import { FaTimes, FaCaretDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { RiMenu2Fill } from "react-icons/ri";
+
 
 const MenuLinks = [
   {
@@ -59,13 +61,21 @@ const Mobilemenu = () => {
     <>
       <div className="lg:hidden sm:flex md:flex-col">
         <button
-          className="block text-gray-500 dark:text-white"
+          className="block text-gray-500"
           onClick={toggleMenu}
         >
           {isOpen ? (
-            <FaTimes className="text-2xl" />
+            <>
+            <FaTimes className=" text-2xl bg-blue-300 rounded-md text-black" />
+            <div
+            className='w-screen h-screen absolute -z-10 popup-overlay backdrop-blur-[1px]'
+            // onClick={}
+          ></div>
+            </>
           ) : (
-            <FaBars className="text-2xl" />
+            <>
+            <RiMenu2Fill className="text-3xl bg-blue-300 rounded-md text-black" />
+            </>
           )}
         </button>
         {isOpen && (

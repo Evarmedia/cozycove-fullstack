@@ -7,9 +7,8 @@ import MobileSearchBar from "./MobileSearchBar";
 import SearchBar from "./SearchBar";
 import Mobilemenu from "./Mobilemenu";
 import axios from "axios";
-// import { SearchContext } from "../../contexts/SearchContext";
-// import { useContext } from "react";
-import { IoMdSearch } from "react-icons/io";
+import { useEffect, useState } from "react";
+
 
 const MenuLinks = [
   {
@@ -58,9 +57,40 @@ const DropdownLinks = [
 ];
 
 const Navbar = () => {
-  // const { setSearchTerm } = useContext(SearchContext); //search
   const navigate = useNavigate(); //search
   const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  const [cart, setCart] = useState([]);
+
+
+  useEffect(() => {
+    const fetchCartData = async () => {
+      try {
+        // Fetch cart data
+        const response = await axios.post(
+          `http://localhost:3005/api/create_getcart/${userId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const cartData = response.data;
+        // console.log(cartData.products);
+
+        // Update cart data with detailed product information
+        setCart(cartData.products);
+        // console.log(cartData.products)
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      }
+    };
+
+    fetchCartData();
+  }, [token, userId]);
+
 
   // function that handles the logout button
   const handleLogout = async () => {
@@ -79,16 +109,10 @@ const Navbar = () => {
     }
   };
 
-  // // function that handles the search
-  // const handleSearch = (event) => {
-  //     setSearchTerm(event.target.value);
-  //     // navigate("/search");
-  // };
-
   return (
     <>
-      <div className='lg:px-32 w-full bg-white dark:bg-gray-900 duration-200 sticky z-40 border-b-2 border-grey-200'>
-        <div className='py-3'>
+      <div className='lg:px-32 w-full bg-white duration-200 sticky z-40 border-b-2 border-grey-200'>
+        <div className='py-1'>
           <div className='flex justify-between items-center'>
             <div className='mx-12 lg:mx-0 flex tems-center gap-4'>
               <NavLink
@@ -148,11 +172,11 @@ const Navbar = () => {
                   <button className='btn-primary' onClick={handleLogout}>
                     Logout
                   </button>
-                  <button className=' hidden lg:block relative p-3'>
+                  <button className='relative p-3'>
                     <NavLink to={`/cart/${userId}`}>
                       <AiOutlineShoppingCart className='text-2xl text-gray-600 dark:text-gray-400' />
                       <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>
-                        0
+                        {cart.length}
                       </div>
                     </NavLink>
                   </button>
@@ -177,7 +201,7 @@ const Navbar = () => {
                     <NavLink to='/login'>
                       <AiOutlineShoppingCart className='text-2xl text-gray-600 dark:text-gray-400' />
                       <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>
-                        0
+                        {console.log(cart.length)}
                       </div>
                     </NavLink>
                   </button>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { IoMdSearch } from "react-icons/io";
 import { SearchContext } from '../../contexts/SearchContext';
-import { useNavigate } from 'react-router-dom';
+import { IoMdSearch } from "react-icons/io";
+// import { useNavigate } from 'react-router-dom';
 
 
 const SearchBar = () => {
