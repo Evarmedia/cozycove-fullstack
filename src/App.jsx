@@ -62,7 +62,7 @@ const router = createBrowserRouter(
               element={<ChildrenCategory category='children' />}
             />
             <Route path='accessories' element={<Accessories category='jewelery' />} />
-            <Route exact path='trending' element={<Trending />} />
+            <Route exact path='trending' element={<Trending category='trending'/>} />
           </Route>
 
           <Route path='*' element={<ErrorPage />} />

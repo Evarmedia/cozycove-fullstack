@@ -1,10 +1,11 @@
 import AOS from "aos";
 import React, { useEffect } from "react";
-// import Banner from "../Banner/Banner";
+import Banner from "../Banner/Banner";
 import Hero from "../Hero/Hero";
 import Products from "../ProductDetails/Products";
 import img1 from "../../assets/tmpAssets/child2.png";
 import img2 from "../../assets/tmpAssets/man2.png";
+import { ToastContainer, toast } from "react-toastify";
 // import { useEffect } from "react";
 
 const BannerData = {
@@ -22,7 +23,7 @@ const BannerData = {
 const BannerData2 = {
   discount: "30% OFF",
   title: "Happy Hours",
-  date: "14 Jan to 28 Jan",
+  date: "14 Jul to 28 Sep",
   image: img2,
   title2: "Smart Solo",
   title3: "Winter Sale",
@@ -33,6 +34,7 @@ const BannerData2 = {
 
 const Home = () => {
   // Effect for AOS
+  // const name = localStorage.getItem("name");
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -41,16 +43,18 @@ const Home = () => {
       offset: 100,
     });
     AOS.refresh();
+    // toast.success(`WELCOME BACK ${name}`)
   }, []);
 
   return (
     <main className='px-4 duration-200'>
-      <div className="hidden md:block">
+      <div className='hidden lg:block'>
         <Hero />
       </div>
       <Products />
-      {/* <Banner data={BannerData} /> */}
-      {/* <Banner data={BannerData2} /> */}
+      <Banner data={BannerData} />
+      <Banner data={BannerData2} />
+      <ToastContainer />
     </main>
   );
 };

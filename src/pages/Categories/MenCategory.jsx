@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../ProductDetails/ProductCard";
+import axios from "axios";
+
 
 // eslint-disable-next-line react/prop-types
-const MenCategory = ({ category }) => {
+const MenCategory = ({category}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/products?category=${category}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data); // Assuming your API response contains a 'products' array
+    axios.get(`http://localhost:3005/api/product?category=${category}`)
+      .then((res) => {
+        setProducts(res.data.data); // 
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -19,9 +20,9 @@ const MenCategory = ({ category }) => {
   return (
     <div className="mt-8">
       <h1 className="text-3xl text-center uppercase font-semibold mb-4">{category}</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
       </div>
     </div>

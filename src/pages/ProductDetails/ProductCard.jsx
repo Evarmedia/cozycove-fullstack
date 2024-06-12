@@ -2,11 +2,14 @@
 // import React from 'react';
 import { NavLink } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
-import { useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { MdFavoriteBorder } from "react-icons/md";
 
 const ProductCard = ({ product }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const productId = product._id;
@@ -32,41 +35,68 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const handleFavoriteClick = () => {
+    setIsFavorited(!isFavorited);
+  };
+
   return (
-      <>
-        <div className='w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md shadow-'>
+    <>
+      <div className='relative w-full h-full bg-white border border-gray-200 rounded-lg shadow-md'>
+        {/* image/title */}
+        <div className=' flex flex-col md:h-2/3'>
           <NavLink to={`/products/${product._id}`}>
-            <div className='px-5 pb-5 h-3/4'>
+            <div className='flex items-center justify-center'>
               <img
-                className='p-8 rounded-t-lg w-[300px] h-[300px] object-scale-down'
+                className='sm:p-4 p-2 rounded-t-lg w-[250px] h-[200px] object-contain'
                 src={product.image}
                 alt={product.title}
               />
-              <h5 className='text-xl font-semibold tracking-tight text-gray-900 dark:text-white'>
-                {product.title}
-              </h5>
             </div>
           </NavLink>
-          <div className='px-5 pb-5'>
-            <div className='flex items-center mt-2.5 mb-5'>
-              <div className='flex items-center space-x-1 rtl:space-x-reverse'>
-                <FaStar className='text-yellow-300' />
+
+          {/* Favourite Button... needs backend to stick just a toggle for now */}
+          <button onClick={handleFavoriteClick} className='focus:outline-none'>
+            {isFavorited ? (
+              <div className='absolute right-3 cursor-pointer top-3 text-3xl text-red-500 hover:text-gray-300'>
+                <MdFavoriteBorder />
               </div>
-              <span className=' bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3'>
-                {product.rating}
-              </span>
-            </div>
-            <div className='flex items-center justify-between'>
-              <span className='text-3xl font-semibold text-gray-900 dark:text-white'>
-                ${product.price}
-              </span>
-              <button className='btn-cart' onClick={addToCartHandler}>
-                Add to cart
-              </button>
-            </div>
+            ) : (
+              <div className='absolute right-3 cursor-pointer top-3 text-3xl text-gray-500 hover:text-red-300'>
+                <MdFavoriteBorder />
+              </div>
+            )}
+          </button>
+
+            {/* Product Title */}
+          <div className='h-5 mb-3 overflow-hidden'>
+            <h5 className='text-xs md:text-sm font-semibold tracking-tight text-gray-900 mx-4'>
+              {product.title}
+            </h5>
           </div>
-          <ToastContainer />
         </div>
+
+            {/* Card Buttom-->rating/price/addtocart */}
+        <div className='px-1 md:px-5 py-1 md:pb-5 md:bg-gray-100 md:h-1/3 rounded-b-2xl'>
+        
+          <div className='flex items-center md:mt-2 md:mb-5 mb-2'>
+            <div className='flex items-center space-x-1 rtl:space-x-reverse'>
+              <FaStar className='text-yellow-300' />
+            </div>
+            <span className=' bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3'>
+              {product.rating}
+            </span>
+          </div>
+          <div className='flex items-center justify-between'>
+            <span className='md:text-2xl font-semibold text-gray-900'>
+              ${product.price}
+            </span>
+            <button className='btn-cart' onClick={addToCartHandler}>
+              Add to cart
+            </button>
+          </div>
+        </div>
+        <ToastContainer />
+      </div>
     </>
   );
 };

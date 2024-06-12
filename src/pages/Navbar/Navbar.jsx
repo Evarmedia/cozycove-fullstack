@@ -61,6 +61,7 @@ const Navbar = () => {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
+  const name = localStorage.getItem('name');
   const [cart, setCart] = useState([]);
 
 

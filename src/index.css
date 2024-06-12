@@ -30,6 +30,22 @@
     @apply px-2 py-2 font-semibold bg-brandYellow text-sm text-black rounded-full hover:bg-yellow-700 hover:border-0 hover:text-white
   }
   .btn-cart {
-    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg md:text-sm md:px-3 md:py-2.5 text-center text-xs p-2 
   }
+
+  
+}
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 10s linear infinite;
 }
