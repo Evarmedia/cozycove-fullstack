@@ -6,8 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import MobileSearchBar from "./MobileSearchBar";
 import SearchBar from "./SearchBar";
 import Mobilemenu from "./Mobilemenu";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import { useContext } from "react";
 
 
 const MenuLinks = [
@@ -59,38 +59,8 @@ const DropdownLinks = [
 const Navbar = () => {
   const navigate = useNavigate(); //search
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
 
-  const name = localStorage.getItem('name');
-  const [cart, setCart] = useState([]);
-
-
-  useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        // Fetch cart data
-        const response = await axios.post(
-          `http://localhost:3005/api/create_getcart/${userId}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const cartData = response.data;
-        // console.log(cartData.products);
-
-        // Update cart data with detailed product information
-        setCart(cartData.products);
-        // console.log(cartData.products)
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    };
-
-    fetchCartData();
-  }, [token, userId]);
+  const { cart } = useContext(CartContext)
 
 
   // function that handles the logout button
@@ -112,7 +82,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='lg:px-32 w-full bg-white duration-200 sticky z-40 border-b-2 border-grey-200'>
+      <div className='lg:px-32 w-full bg-white duration-200 sticky top-0 z-50 border-b-2 border-grey-200'>
         <div className='py-1'>
           <div className='flex justify-between items-center'>
             <div className='mx-12 lg:mx-0 flex tems-center gap-4'>
@@ -202,7 +172,7 @@ const Navbar = () => {
                     <NavLink to='/login'>
                       <AiOutlineShoppingCart className='text-2xl text-gray-600 dark:text-gray-400' />
                       <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>
-                        {console.log(cart.length)}
+                        0
                       </div>
                     </NavLink>
                   </button>

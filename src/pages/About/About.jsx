@@ -90,12 +90,12 @@ const About = () => {
               </div>
             </div>
             <div className="flex gap-10 justify-center mb-4 bg-gray-100 p-10">
-              <a href="/products" className="btn-secondary">
+              <NavLink to="/products" className="btn-secondary">
                 checkout the store
-              </a>
-              <a href="/categories" className="btn-secondary">
+              </NavLink>
+              <NavLink to="/categories" className="btn-secondary">
                 see product categories
-              </a>
+              </NavLink>
               <button className="btn-primary">contact us</button>
             </div>
             <div>

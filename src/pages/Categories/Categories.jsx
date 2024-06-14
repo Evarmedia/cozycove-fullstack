@@ -9,10 +9,10 @@ const Categories = () => {
   return (
     <div className="my-12 px-8 sm:py-8 sm:px-36">
       <div className="">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* first col */}
           <NavLink to="men">
-          <div className="py-10 pl-5 bg-gradient-to-br from-blue-700/90 to-blue-900/70 text-white rounded-3xl relative h-[320px] flex items-end">
+          <div className="py-10 pl-5 bg-gradient-to-br from-blue-700 to-blue-900/70 text-white rounded-3xl relative h-[320px] flex items-end">
             <div>
               <div className="mb-4">
                 <p className="mb-[2px] text-gray-400">Enjoy</p>
@@ -30,7 +30,7 @@ const Categories = () => {
           </NavLink>
           {/* second col */}
           <NavLink to="women">
-          <div className="py-10 pl-5 bg-gradient-to-br from-brandYellow to-brandYellow/90 text-white rounded-3xl relative h-[320px] flex items-end">
+          <div className="py-10 pl-5 bg-gradient-to-br from-brandYellow to-brandYellow/80 text-white rounded-3xl relative h-[320px] flex items-end">
             <div>
               <div className="mb-4">
                 <p className="mb-[2px] text-white">Own</p>
@@ -38,7 +38,7 @@ const Categories = () => {
                 <p className="text-4xl xl:text-5xl font-bold opacity-40 mb-2 z-10">
                   Women's <br/>Fashion
                 </p>
-                <button className="bg-white text-yellow-600 rounded-full px-4 py-1">
+                <button className="bg-white z-99 text-yellow-600 rounded-full px-4 py-1">
                     Browse
                 </button>
               </div>
@@ -46,7 +46,7 @@ const Categories = () => {
             <img
               src={Image2}
               alt=""
-              className="sm:w-[320px] w-[200px] h-[300px] sm:h-auto absolute -right-2 sm:-bottom-5 -bottom-1"
+              className="sm:w-[320px] w-[200px] h-[300px] sm:h-auto absolute sm:-right-12 -right-2 sm:-bottom-5 -bottom-1"
             />
           </div>
           </NavLink>

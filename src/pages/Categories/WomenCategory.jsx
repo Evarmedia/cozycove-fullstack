@@ -19,9 +19,9 @@ const WomenCategory = ({category}) => {
   }, [category]);
 
   return (
-    <div className="mt-8">
+    <div className="my-8 mx-4">
       <h1 className="text-3xl text-center uppercase font-semibold mb-4">{category}</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}

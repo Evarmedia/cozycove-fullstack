@@ -3,37 +3,19 @@
 import { NavLink } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import { useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { MdFavoriteBorder } from "react-icons/md";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 const ProductCard = ({ product }) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
-  const productId = product._id;
+  const { addToCart, } = useContext(CartContext)
 
-  const addToCartHandler = async () => {
-    try {
-      const response = await axios.put(
-        `http://localhost:3005/api/addtocart/${userId}/${productId}`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      // console.log(response.data);
-      toast.success(response.data.message);
-    } catch (error) {
-      console.log(error);
-      if (error.response && error.response.status === 401) {
-        toast.error("Unauthorized access. Please log in again.");
-      } else {
-        toast.error("An error occurred while adding to the cart.");
-      }
-    }
-  };
+  const handleAddToCart = () => {
+    addToCart(product._id);
+    };
 
   const handleFavoriteClick = () => {
     setIsFavorited(!isFavorited);
@@ -90,12 +72,11 @@ const ProductCard = ({ product }) => {
             <span className='md:text-2xl font-semibold text-gray-900'>
               ${product.price}
             </span>
-            <button className='btn-cart' onClick={addToCartHandler}>
+            <button className='btn-cart' onClick={handleAddToCart}>
               Add to cart
             </button>
           </div>
         </div>
-        <ToastContainer />
       </div>
     </>
   );
