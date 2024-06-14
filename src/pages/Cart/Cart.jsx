@@ -6,14 +6,20 @@ import { MdDeleteSweep } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import EmptyCart from "./EmptyCart";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 
 const Cart = () => {
   const { userId } = useParams();
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [carto, setCart] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+
+  const { cart } = useContext(CartContext)
+
+  console.log('MyCart:', cart)
 
   const deleteProduct = async (productId) => {
     try {
@@ -26,8 +32,8 @@ const Cart = () => {
 
       toast.success(response.data.mesage)
       // toast.success("You clicked the delete button"); 
-      setCart(cart.filter((item) => item.productId._id !== productId));
-      // console.log(cart.filter((item) => item.productId._id !== productId))
+      setCart(carto.filter((item) => item.productId._id !== productId));
+      // console.log(carto.filter((item) => item.productId._id !== productId))
       
     } catch (error) {
       console.log(error);
@@ -39,34 +45,7 @@ const Cart = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        // Fetch cart data
-        const response = await axios.post(
-          `http://localhost:3005/api/create_getcart/${userId}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const cartData = response.data;
-        // console.log(cartData.products);
 
-        // Update cart data with detailed product information
-        setCart(cartData.products);
-        // console.log(cartData.products)
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchCartData();
-  }, [token, userId]);
 
   const updateQuantity = async (productId, quantity) => {
     try {
@@ -87,19 +66,19 @@ const Cart = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className='flex justify-center py-20'>
-        <GiEmptyHourglass className='animate-spin text-3xl' />
-        <h1 className='animate-pulse text-6xl font-semibold'>Loading...</h1>;
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className='flex justify-center py-20'>
+  //       <GiEmptyHourglass className='animate-spin text-3xl' />
+  //       <h1 className='animate-pulse text-6xl font-semibold'>Loading...</h1>;
+  //     </div>
+  //   );
+  // }
 
-  // console.log(cart.products)
-  if (cart.length === 0) {
-    return <EmptyCart />;
-  }
+  // console.log(carto.products)
+  // if (carto.length === 0) {
+  //   return <EmptyCart />;
+  // }
 
   return (
     // <></>
