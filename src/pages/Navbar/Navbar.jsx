@@ -1,20 +1,20 @@
 // import React, { useState } from 'react';
+import { useContext } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaCaretDown } from "react-icons/fa6";
 import { MdPerson } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
-import MobileSearchBar from "./MobileSearchBar";
-import SearchBar from "./SearchBar";
-import Mobilemenu from "./Mobilemenu";
 import { CartContext } from "../../contexts/CartContext";
-import { useContext } from "react";
+import MobileSearchBar from "./MobileSearchBar";
+import Mobilemenu from "./Mobilemenu";
+import SearchBar from "./SearchBar";
 
 
 const MenuLinks = [
   {
     id: 1,
     name: "Home",
-    link: "/home",
+    link: "/",
   },
   {
     id: 2,
@@ -74,7 +74,7 @@ const Navbar = () => {
       // });
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.error("Logout failed", error);
     }
@@ -87,7 +87,7 @@ const Navbar = () => {
           <div className='flex justify-between items-center'>
             <div className='mx-12 lg:mx-0 flex tems-center gap-4'>
               <NavLink
-                to='/home'
+                to='/'
                 className='text-primary font-semibold tracking-tighter text-2xl sm:text-3xl'
               >
                 CozyCove

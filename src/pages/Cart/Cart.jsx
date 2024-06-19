@@ -32,7 +32,8 @@ const Cart = () => {
         </h2>
 
         {cart.map((item) => (
-            <CartItem key={item.productId._id} item={item} />
+          <CartItem key={item.productId._id} item={item} />
+          // console.log(item)
           ))}
 
           {/* Calulated the total here.. might need to change to state to pull it out for use later */}
@@ -42,7 +43,7 @@ const Cart = () => {
               Subtotal:
             </h5>
             <h6 className='font-manrope font-bold text-3xl lead-10 text-indigo-600'>
-              $
+              ₦
               {cart
                 .reduce(
                   (acc, item) => acc + item.productId.price * item.quantity,

@@ -66,7 +66,7 @@ const Login = () => {
         toast.success(res.data.message);
         //redirect to home
         setTimeout(() => {
-          navigate("/home");
+          navigate("/");
         }, 1500);
 
         setEmail("");

@@ -66,7 +66,7 @@ const Hero = () => {
                       {data.title2}
                     </h1>
                     <div>
-                      <NavLink to="categories">
+                      <NavLink to="/categories">
                         <button className="btn-secondary text-xl px-4 shadow-md font-mono">
                           Explore Category
                         </button>

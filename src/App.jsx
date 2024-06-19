@@ -38,11 +38,11 @@ import PrivateRoute from "./pages/Auth/PrivateRoute";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route exact path='/register' element={<Signup />} />
       <Route exact path='/login' element={<Login />} />
-      <Route exact path='/' element={<Signup />} />
       <Route element={<RootLayout />}>
         {/* Public routes */}
-        <Route path='/home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route exact path='/about' element={<About />} />
         {/* <Route exact path='/search' element={<SearchResultsPage />} /> */}
