@@ -1,15 +1,22 @@
 // ProductDetail.jsx
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import RecommendedProducts from "./RecommendedProducts";
+import { CartContext } from "../../contexts/CartContext";
 
 const ProductDetail = () => {
   const { productId } = useParams(); 
   const [product, setProduct] = useState(null);
   const token = localStorage.getItem('token');
   
+  const { addToCart } = useContext(CartContext);
+  
+  const handleAddToCart = () => {
+    addToCart(product._id);
+    };
+
   useEffect(() => {
     axios.get(`http://localhost:3005/api/product/${productId}`, {
       headers: {
@@ -22,7 +29,7 @@ const ProductDetail = () => {
       }).catch((error) => {
         console.error({message: error.message});
       });
-  }, [productId]);
+  }, [productId, token]);
 
 
 
@@ -109,10 +116,13 @@ const ProductDetail = () => {
                   </div>
                   <div className="flex">
                     <span className="title-font font-semibold text-2xl text-gray-900">
-                      ${product.price}
+                    ₦{product.price}
                     </span>
-                    <button className="flex ml-auto btn-cart">
-                      Buy Now
+                    <button 
+                    className="flex ml-auto btn-cart"
+                    onClick={handleAddToCart}
+                    >
+                      Add to cart
                     </button>
                     <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                       <svg

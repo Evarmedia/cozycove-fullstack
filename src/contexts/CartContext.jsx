@@ -14,10 +14,34 @@ export const CartProvider = ({ children }) => {
   
   const [loading, setLoading] = useState(true);
 
+// save cart to local storage
+  const saveCartToStorage = (cartData) => {
+    try {
+      localStorage.setItem('cart', JSON.stringify(cartData));
+    } catch (error) {
+      console.error("Error saving cart data to storage:", error);
+    }
+  };
+
+    // Function to load cart from Async Storage
+    const loadCartFromStorage = () => {
+      try {
+        const storedCart = localStorage.getItem('cart');
+        return storedCart ? JSON.parse(storedCart) : [];
+      } catch (error) {
+        console.error("Error loading cart data from storage:", error);
+        return [];
+      }
+    };
+
 // Fetch cart items arr
  useEffect(() => {
     const fetchCartData = async () => {
       try {
+        const storedCart = await loadCartFromStorage();
+        if (storedCart.length > 0) {
+          setCart(storedCart);
+        } else {
         // Fetch cart data
         const response = await axios.post(
           `http://localhost:3005/api/create_getcart/${userId}`,
@@ -33,7 +57,9 @@ export const CartProvider = ({ children }) => {
 
         // Update cart data with detailed product information
         setCart(cartData.products);
+        saveCartToStorage(cartData.products);
         // console.log(cartData.products)
+      }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching cart data:", error);
@@ -51,6 +77,7 @@ export const CartProvider = ({ children }) => {
         item.productId._id === productId ? { ...item, quantity } : item
       )
     );
+    saveCartToStorage(cart);
   };
   // sever quantity update
   const updateQuantity = async (productId, quantity) => {
@@ -67,12 +94,12 @@ export const CartProvider = ({ children }) => {
         }
       );
       setCart(response.data.products);
+      saveCartToStorage(response.data.products);
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
   };
 
-  
 
   //Add to cart
   const addToCart = async (productId) => {
@@ -86,7 +113,13 @@ export const CartProvider = ({ children }) => {
       );
 
       setCart(response.data.cart.products);
-      toast.success(response.data.message);
+      toast.success(response.data.message, {
+        position: "top-left",
+        autoClose: 1000,
+        pauseOnFocusLoss: false
+      });
+      toast.clearWaitingQueue();
+      saveCartToStorage(response.data.cart.products)
 
     } catch (error) {
       console.log(error);
@@ -102,6 +135,7 @@ export const CartProvider = ({ children }) => {
   const deleteProduct = async (productId) => {
     try {
       setCart(cart.filter((item) => item.productId._id !== productId));
+      toast.error("Item Deleted");
       const response = await axios.delete(
         `http://localhost:3005/api/delete/${userId}/${productId}`,
       {
@@ -109,7 +143,8 @@ export const CartProvider = ({ children }) => {
       }
     );
 
-      toast.success(response.data.mesage);
+      
+      saveCartToStorage(cart.filter((item) => item.productId._id !== productId));
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 401) {
@@ -120,8 +155,26 @@ export const CartProvider = ({ children }) => {
     }
   };
   
+  const clearCart = async () => {
+    try {
+      // setCart([]);
+      saveCartToStorage([]);
+      toast.success('Opps You just cleared Your cart')
+      const response = await axios.delete(
+        `http://localhost:3005/api/clearcart/${userId}`,
+        {
+          headers: {'Authorization':`Bearer ${token}`} 
+        }
+      );
+      setCart(response.data.products);
+      // console.log(response.data.products);
+
+    } catch (error) {
+      toast.error("An error occurred while clear the items.");
+    }
+  };
   return (
-    <CartContext.Provider value={{ cart, loading, updateQuantity, deleteProduct, addToCart }}>
+    <CartContext.Provider value={{ cart, loading, updateQuantity, deleteProduct, addToCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

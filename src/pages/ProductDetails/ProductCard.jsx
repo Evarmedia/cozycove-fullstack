@@ -11,7 +11,7 @@ import { CartContext } from "../../contexts/CartContext";
 const ProductCard = ({ product }) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const { addToCart, } = useContext(CartContext)
+  const { addToCart } = useContext(CartContext)
 
   const handleAddToCart = () => {
     addToCart(product._id);

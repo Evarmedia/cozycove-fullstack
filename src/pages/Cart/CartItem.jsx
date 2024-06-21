@@ -52,7 +52,8 @@ const CartItem = ({ item }) => {
             {item.productId.title}
           </h5>
           <button
-            className='bg-red-200 p-1 hover:bg-red-400 rounded-full group flex items-center justify-center focus-within:outline-red-500'
+          title='Delete Item'
+            className='bg-red-200 p-1 hover:bg-red-400 rounded-full group flex items-center justify-center focus-within:outline-red-500 shadow-black shadow-sm'
             onClick={handleDeleteProduct}
           >
             <MdDeleteSweep className='text-2xl' />
@@ -64,7 +65,7 @@ const CartItem = ({ item }) => {
         <div className='flex justify-between items-center'>
           <div className='flex items-center gap-4'>
             <button
-              className={`group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300 ${
+              className={`group rounded-[50px] border shadow-black border-gray-200 shadow-sm p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300 ${
                 isUpdating ? 'bg-gray-200 border-gray-300' : ''
               }`}
               onClick={() => handleQuantityChange(localQuantity - 1)}
@@ -79,7 +80,7 @@ const CartItem = ({ item }) => {
               readOnly
             />
             <button
-             className={`group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300 ${
+             className={`group rounded-[50px] border border-gray-200 shadow-black shadow-sm p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300 ${
                 isUpdating ? 'bg-gray-200 border-gray-300' : ''
               }`}
               onClick={() => handleQuantityChange(localQuantity + 1)}

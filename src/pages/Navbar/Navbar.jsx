@@ -74,7 +74,9 @@ const Navbar = () => {
       // });
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
-      navigate("/");
+      localStorage.removeItem("cart");
+      localStorage.removeItem("name");
+      navigate("/login");
     } catch (error) {
       console.error("Logout failed", error);
     }

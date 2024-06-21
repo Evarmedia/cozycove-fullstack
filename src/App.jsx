@@ -34,6 +34,7 @@ import {
 import RootLayout from "./pages/Layouts/RootLayout";
 import CategoriesLayout from "./pages/Layouts/CategoriesLayout";
 import PrivateRoute from "./pages/Auth/PrivateRoute";
+import Payments from "./pages/Payments/Payments";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,13 +46,14 @@ const router = createBrowserRouter(
         <Route path='/' element={<Home />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route exact path='/about' element={<About />} />
-        {/* <Route exact path='/search' element={<SearchResultsPage />} /> */}
+        <Route path='/empty-cart' element={<EmptyCart />} />
+        
+
         {/* Private Routes */}
         <Route element={<PrivateRoute />}>
-          <Route exact path='/forgotpassword' element={<ForgotPassword />} />
-          <Route exact path='/newpassword' element={<NewPassword />} />
+          <Route path='/forgotpassword' element={<ForgotPassword />} />
+          <Route path='/newpassword' element={<NewPassword />} />
           <Route path='/cart/:userId' element={<Cart />} />
-          <Route path='/empty-cart' element={<EmptyCart />} />
           <Route path='/products' element={<Products />} />
           <Route path='/userprofile/:userId' element={<UserProfile />} />
           <Route path='/categories' element={<Categories />} />
@@ -66,6 +68,7 @@ const router = createBrowserRouter(
             <Route path='accessories' element={<Accessories category='jewelery' />} />
             <Route exact path='trending' element={<Trending category='trending'/>} />
           </Route>
+          <Route path="/checkout" element={<Payments />}/>
 
           <Route path='*' element={<ErrorPage />} />
         </Route>
