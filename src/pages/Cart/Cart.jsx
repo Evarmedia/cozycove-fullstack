@@ -6,9 +6,21 @@ import CartItem from "./CartItem";
 import CheckoutButton from "./CheckoutButton";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import 'react-toastify/dist/ReactToastify.css';
+import { NavLink, useNavigate } from "react-router-dom";
+
+// import logout from '../Auth/logout';
 
 const Cart = () => {
+
   const { cart, loading, clearCart } = useContext(CartContext);
+  
+  // const navigate = useNavigate();
+  // const tokenExpiry = localStorage.getItem("tokenExpiry");
+
+  // if (tokenExpiry && Date.now() > tokenExpiry) {
+  //   logout(navigate);
+  //   return;
+  // }
 
   if (loading) {
     return <Loading />;
@@ -60,9 +72,12 @@ const Cart = () => {
           <p className='font-normal text-base leading-7 text-gray-500 text-center mb-5 mt-6'>
             Shipping taxes, and discounts calculated at checkout
           </p>
+          <NavLink to='/checkout'>
+
           <button className='rounded-full py-4 px-6 bg-indigo-600 text-white font-semibold text-lg text-center transition-all duration-500 hover:bg-indigo-700 shadow-black shadow-sm'>
             <CheckoutButton />
           </button>
+          </NavLink>
         </div>
       </div>
     </section>

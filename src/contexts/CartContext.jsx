@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import logout from '../pages/Auth/logout';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // const [pcart, setPCart] = useState({});
   
   const [cart, setCart] = useState([]);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
-  
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
 // save cart to local storage
   const saveCartToStorage = (cartData) => {
@@ -24,8 +26,8 @@ export const CartProvider = ({ children }) => {
   };
 
     // Function to load cart from Async Storage
-    const loadCartFromStorage = () => {
-      try {
+  const loadCartFromStorage = () => {
+    try {
         const storedCart = localStorage.getItem('cart');
         return storedCart ? JSON.parse(storedCart) : [];
       } catch (error) {
@@ -34,8 +36,9 @@ export const CartProvider = ({ children }) => {
       }
     };
 
+
 // Fetch cart items arr
- useEffect(() => {
+  useEffect(() => {
     const fetchCartData = async () => {
       try {
         const storedCart = await loadCartFromStorage();
@@ -68,8 +71,22 @@ export const CartProvider = ({ children }) => {
     };
 
     fetchCartData();
-  }, [token, userId]);
+
+
+    // Token expiry check
+    const interval = setInterval(() => {
+      const tokenExpiry = localStorage.getItem("tokenExpiry");
+      if (tokenExpiry && Date.now() > tokenExpiry) {
+        logout(navigate);
+      }
+    }, 60000); // Check every minute
+
+    return () => {
+      clearInterval(interval); // Cleanup on component unmount
+    };
+  }, [token, userId, navigate]);
   
+
   // set cart UI to render product quantity
   const updateLocalQuantity = (productId, quantity) => {
     setCart(prevCart =>
@@ -79,6 +96,7 @@ export const CartProvider = ({ children }) => {
     );
     saveCartToStorage(cart);
   };
+
   // sever quantity update
   const updateQuantity = async (productId, quantity) => {
     updateLocalQuantity(productId, quantity)
@@ -131,6 +149,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  
   //api call to delete product item, render cart first then update quantity in the backend
   const deleteProduct = async (productId) => {
     try {
@@ -155,9 +174,10 @@ export const CartProvider = ({ children }) => {
     }
   };
   
+
   const clearCart = async () => {
     try {
-      // setCart([]);
+      setCart([]);
       saveCartToStorage([]);
       toast.success('Opps You just cleared Your cart')
       const response = await axios.delete(
@@ -173,6 +193,8 @@ export const CartProvider = ({ children }) => {
       toast.error("An error occurred while clear the items.");
     }
   };
+
+
   return (
     <CartContext.Provider value={{ cart, loading, updateQuantity, deleteProduct, addToCart, clearCart }}>
       {children}

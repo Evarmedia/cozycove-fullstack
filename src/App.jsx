@@ -34,7 +34,7 @@ import {
 import RootLayout from "./pages/Layouts/RootLayout";
 import CategoriesLayout from "./pages/Layouts/CategoriesLayout";
 import PrivateRoute from "./pages/Auth/PrivateRoute";
-import Payments from "./pages/Payments/Payments";
+import Checkout from "./pages/Payments/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -68,7 +68,7 @@ const router = createBrowserRouter(
             <Route path='accessories' element={<Accessories category='jewelery' />} />
             <Route exact path='trending' element={<Trending category='trending'/>} />
           </Route>
-          <Route path="/checkout" element={<Payments />}/>
+          <Route path="/checkout" element={<Checkout />}/>
 
           <Route path='*' element={<ErrorPage />} />
         </Route>
@@ -76,7 +76,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
-function App() {
+const App = () => {
   return (
     <SearchProvider>
       <RouterProvider router={router} />

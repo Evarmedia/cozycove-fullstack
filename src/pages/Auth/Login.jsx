@@ -48,12 +48,12 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {
+    const credentials = {
       email,
       password,
     };
     axios
-      .post("http://localhost:3005/api/auth/login", data)
+      .post("http://localhost:3005/api/auth/login", credentials)
       .then((res) => {
         // console.log(data);
         // console.log(res.data);
@@ -62,6 +62,7 @@ const Login = () => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('name', res.data.name);
+        localStorage.setItem('tokenExpiry', res.data.tokenExpiry);
 
         toast.success(res.data.message);
         //redirect to home

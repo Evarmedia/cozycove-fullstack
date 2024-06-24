@@ -8,6 +8,7 @@ import { CartContext } from "../../contexts/CartContext";
 import MobileSearchBar from "./MobileSearchBar";
 import Mobilemenu from "./Mobilemenu";
 import SearchBar from "./SearchBar";
+import logout from "../Auth/logout";
 
 
 const MenuLinks = [
@@ -57,7 +58,7 @@ const DropdownLinks = [
 ];
 
 const Navbar = () => {
-  const navigate = useNavigate(); //search
+  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
   const { cart } = useContext(CartContext)
@@ -65,21 +66,7 @@ const Navbar = () => {
 
   // function that handles the logout button
   const handleLogout = async () => {
-    try {
-      // const token = localStorage.remoItem('token');
-      // await axios.post('http://localhost:3005/product/auth/signout', {}, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // });
-      localStorage.removeItem("token");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("name");
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout failed", error);
-    }
+    logout(navigate);
   };
 
   return (
