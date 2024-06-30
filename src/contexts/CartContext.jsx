@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import axios from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
@@ -14,6 +15,8 @@ export const CartProvider = ({ children }) => {
   const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
 
 
 // save cart to local storage
@@ -47,7 +50,7 @@ export const CartProvider = ({ children }) => {
         } else {
         // Fetch cart data
         const response = await axios.post(
-          `http://localhost:3005/api/create_getcart/${userId}`,
+          `${deployedUrl}/api/create_getcart/${userId}`,
           {},
           {
             headers: {
@@ -103,7 +106,7 @@ export const CartProvider = ({ children }) => {
     try {
 
       const response = await axios.put(
-        `http://localhost:3005/api/updateqty/${userId}`,
+        `${deployedUrl}/api/updateqty/${userId}`,
         { productId, quantity },
         {
           headers: {
@@ -123,7 +126,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (productId) => {
     try {
       const response = await axios.put(
-        `http://localhost:3005/api/addtocart/${userId}/${productId}`,
+        `${deployedUrl}/api/addtocart/${userId}/${productId}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -156,7 +159,7 @@ export const CartProvider = ({ children }) => {
       setCart(cart.filter((item) => item.productId._id !== productId));
       toast.error("Item Deleted");
       const response = await axios.delete(
-        `http://localhost:3005/api/delete/${userId}/${productId}`,
+        `${deployedUrl}/api/delete/${userId}/${productId}`,
       {
         headers: {'Authorization':`Bearer ${token}`} 
       }
@@ -181,7 +184,7 @@ export const CartProvider = ({ children }) => {
       saveCartToStorage([]);
       toast.success('Opps You just cleared Your cart')
       const response = await axios.delete(
-        `http://localhost:3005/api/clearcart/${userId}`,
+        `${deployedUrl}/api/clearcart/${userId}`,
         {
           headers: {'Authorization':`Bearer ${token}`} 
         }

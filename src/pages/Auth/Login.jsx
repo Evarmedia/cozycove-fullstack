@@ -46,6 +46,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate("");
 
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const credentials = {
@@ -53,7 +55,7 @@ const Login = () => {
       password,
     };
     axios
-      .post("http://localhost:3005/api/auth/login", credentials)
+      .post(`${deployedUrl}/api/auth/login`, credentials)
       .then((res) => {
         // console.log(data);
         // console.log(res.data);

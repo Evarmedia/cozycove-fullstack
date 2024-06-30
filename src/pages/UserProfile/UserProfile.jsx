@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -20,12 +21,15 @@ const UserProfile = () => {
   // const [country, setCountry] = useState("");
 
 
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
+  
   useEffect(() => {
     // NOTE: CHANGE THIS TO AN EDIT_USER (POST) METHOD, DO SAME IN BACKEND
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3005/api/auth/showuser/${userId}`,
+          `${deployedUrl}/api/auth/showuser/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

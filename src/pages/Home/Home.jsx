@@ -5,8 +5,6 @@ import Hero from "../Hero/Hero";
 import Products from "../ProductDetails/Products";
 import img1 from "../../assets/tmpAssets/child2.png";
 import img2 from "../../assets/tmpAssets/man2.png";
-import { ToastContainer, toast } from "react-toastify";
-// import { useEffect } from "react";
 
 const BannerData = {
   discount: "30% OFF",
@@ -37,24 +35,27 @@ const Home = () => {
   // const name = localStorage.getItem("name");
   useEffect(() => {
     AOS.init({
-      duration: 800,
-      easing: "ease-in-sine",
-      delay: 100,
-      offset: 100,
+      duration: 2000,
+      // easing: "ease-in-sine",
+      // delay: 100,
+      // offset: 100,
     });
-    AOS.refresh();
+    // AOS.refresh();
     // toast.success(`WELCOME BACK ${name}`)
   }, []);
 
   return (
     <main className='px-4 duration-200'>
-      <div className='hidden lg:block'>
+      <section className='hidden lg:block' data-aos='fade-in'>
         <Hero />
-      </div>
+      </section>
       <Products />
-      <Banner data={BannerData} />
-      <Banner data={BannerData2} />
-      <ToastContainer />
+      <section id="banner1" data-aos="fade-in">
+        <Banner data={BannerData} />
+      </section>
+      <section id="banner2" data-aos="fade-in">
+        <Banner data={BannerData2} />
+      </section>
     </main>
   );
 };

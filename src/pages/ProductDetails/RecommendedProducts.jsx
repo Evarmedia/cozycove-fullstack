@@ -9,8 +9,11 @@ const RecommendedProducts = () => {
 
   const token = localStorage.getItem('token');
 
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
+
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/product/?_limit=5`, {
+    axios.get(`${deployedUrl}/api/product/?_limit=5`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

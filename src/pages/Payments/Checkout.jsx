@@ -14,6 +14,9 @@ const Checkout = () => {
   });
   const navigate = useNavigate();
 
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -34,7 +37,7 @@ const Checkout = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:3005/api/checkout`,
+        `${deployedUrl}/api/checkout`,
         {
           ...formData,
           cart: cart,

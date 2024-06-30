@@ -12,13 +12,16 @@ const ProductDetail = () => {
   const token = localStorage.getItem('token');
   
   const { addToCart } = useContext(CartContext);
+
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
   
   const handleAddToCart = () => {
     addToCart(product._id);
     };
 
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/product/${productId}`, {
+    axios.get(`${deployedUrl}/api/product/${productId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

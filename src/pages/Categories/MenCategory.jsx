@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import ProductCard from "../ProductDetails/ProductCard";
 import axios from "axios";
@@ -7,8 +8,11 @@ import axios from "axios";
 const MenCategory = ({category}) => {
   const [products, setProducts] = useState([]);
 
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
+
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/product?category=${category}`)
+    axios.get(`${deployedUrl}/api/product?category=${category}`)
       .then((res) => {
         setProducts(res.data.data); // 
       })

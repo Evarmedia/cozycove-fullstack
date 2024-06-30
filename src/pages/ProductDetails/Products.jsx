@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import React from 'react'
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
@@ -13,9 +14,12 @@ const Products = () => {
   const { searchTerm } = useContext(SearchContext);
 
   const token = localStorage.getItem('token');
+  
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
+
 
   useEffect(() => {
-    axios.get('http://localhost:3005/api/product', {
+    axios.get(`${deployedUrl}/api/product`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

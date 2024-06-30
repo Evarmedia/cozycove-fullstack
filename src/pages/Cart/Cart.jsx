@@ -34,7 +34,7 @@ const Cart = () => {
   return (
     <section className='py-5 relative'>
       <div className='w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative'>
-        <div title='Clear Cart'className='absolute flex text-black text-sm font-semibold bg-red-300 rounded-full right-8 top-5 p-2 hover:bg-red-400 shadow-black shadow-sm'>
+        <div title='Clear Cart'className='absolute flex text-black text-xs sm:text-sm font-semibold bg-red-300 rounded-full right-5 top-12 px-1 sm:right-8 sm:top-5 sm:p-2 hover:bg-red-400 shadow-black shadow-sm'>
           <MdOutlineRemoveShoppingCart className="text-xl" />
       <button  onClick={clearCart}>Clear Cart</button>
 

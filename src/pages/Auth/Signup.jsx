@@ -49,6 +49,7 @@ const Signup = () => {
     // const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+    const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -65,7 +66,7 @@ const Signup = () => {
       };
     //   setLoading(true)
       axios
-      .post("http://localhost:3005/api/auth/register", data)
+      .post(`${deployedUrl}/api/auth/register`, data)
       .then((res) => {
         toast.success(res.data.message);
         setFirstname("");
