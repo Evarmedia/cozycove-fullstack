@@ -35,6 +35,7 @@ import RootLayout from "./pages/Layouts/RootLayout";
 import CategoriesLayout from "./pages/Layouts/CategoriesLayout";
 import PrivateRoute from "./pages/Auth/PrivateRoute";
 import Checkout from "./pages/Payments/Checkout";
+import ThankYou from "./pages/Payments/ThankYou";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,6 +70,7 @@ const router = createBrowserRouter(
             <Route exact path='trending' element={<Trending category='trending'/>} />
           </Route>
           <Route path="/checkout" element={<Checkout />}/>
+          <Route path="/thankyou" element={<ThankYou />}/>
 
           <Route path='*' element={<ErrorPage />} />
         </Route>

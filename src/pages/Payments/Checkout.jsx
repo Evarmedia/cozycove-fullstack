@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const { cart, loading } = useContext(CartContext);
+  const { cart, loading, clearCart } = useContext(CartContext);
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     email: "",
     paymentMethod: "card",
   });
+
   const navigate = useNavigate();
 
   const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
@@ -35,31 +36,36 @@ const Checkout = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${deployedUrl}/api/checkout`,
-        {
-          ...formData,
-          cart: cart,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+    // try {
+      // const response = await axios.post(
+      //   `${deployedUrl}/api/checkout`,
+      //   {
+      //     ...formData,
+      //     cart: cart,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //     },
+      //   }
+      // );
 
-      if (response.status === 200) {
-        toast.success("Checkout successful!");
-        // Optionally clear cart in context and local storage
-        navigate("/thank-you");
-      } else {
-        toast.error("Checkout failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Checkout error:", error);
-      toast.error("Checkout failed. Please try again.");
-    }
+      clearCart();
+      toast.success("Checkout successful!");
+      navigate("/thankyou");
+
+
+    //   if (response.status === 200) {
+    //     toast.success("Checkout successful!");
+    //     // Optionally clear cart in context and local storage
+    //     navigate("/thank-you");
+    //   } else {
+    //     toast.error("Checkout failed. Please try again.");
+    //   }
+    // } catch (error) {
+    //   console.error("Checkout error:", error);
+    //   toast.error("Checkout failed. Please try again.");
+    // }
   };
 
   return (
@@ -125,12 +131,15 @@ const Checkout = () => {
               <option value='paypal'>PayPal</option>
             </select>
           </div>
+          
+
           <button
             type='submit'
             className='w-full bg-indigo-600 text-white p-2 rounded'
-          >
+            >
             Place Order
           </button>
+          
         </form>
       </div>
     </section>

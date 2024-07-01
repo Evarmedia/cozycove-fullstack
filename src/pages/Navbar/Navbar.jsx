@@ -152,7 +152,7 @@ const Navbar = () => {
                     <NavLink to='login'>
                       <button className='btn-primary'>Login</button>
                     </NavLink>
-                    <NavLink to='/'>
+                    <NavLink to='/register'>
                       <button className=' ml-1 btn-primary'>SignUp</button>
                     </NavLink>
                   </div>
