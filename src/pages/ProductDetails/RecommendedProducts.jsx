@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // RecommendedProducts.jsx
 
 import { useState, useEffect } from "react";

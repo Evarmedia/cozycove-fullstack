@@ -5,7 +5,7 @@ import axios from "axios";
 import ProductCard from "./ProductCard";
 import { SearchContext } from '../../contexts/SearchContext';
 import { IoMdSearch } from "react-icons/io";
-
+import Loading from "../Shared/Loading";
 
 
 const Products = () => {
@@ -57,10 +57,11 @@ const Products = () => {
             ) : (<>
               <div className="w-full flex justify-center items-center flex-col">
                 
-                <IoMdSearch className="text-8xl animate-bounce text-black"/>
-              <h1 className="text-2xl font-semibold font-mono">
+                <IoMdSearch className="text-6xl animate-bounce text-black"/>
+              {/* <h1 className="text-2xl font-semibold font-mono">
                 {`No Results for "${searchTerm}"`}
-              </h1>
+              </h1> */}
+              <Loading />
 
               </div>
               </>)

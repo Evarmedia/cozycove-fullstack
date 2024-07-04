@@ -1,8 +1,5 @@
 // import React from "react";
 import { useEffect } from "react";
-
-
-
 import About from "./pages/About/About";
 import Categories from "./pages/Categories/Categories";
 import WomenCategory from "./pages/Categories/WomenCategory";
@@ -21,8 +18,8 @@ import ChildrenCategory from "./pages/Categories/ChildrenCategory";
 import MenCategory from "./pages/Categories/MenCategory";
 import Accessories from "../src/pages/Categories/Accessories";
 import UserProfile from "../src/pages/UserProfile/UserProfile";
-// import SearchResultsPage from "./pages/Navbar/SearchResultsPage";
 import { SearchProvider } from "./contexts/SearchContext";
+
 import {
   createBrowserRouter,
   Route,
@@ -30,7 +27,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-// Layout for Pages
+// Layout for More Pages
 import RootLayout from "./pages/Layouts/RootLayout";
 import CategoriesLayout from "./pages/Layouts/CategoriesLayout";
 import PrivateRoute from "./pages/Auth/PrivateRoute";
@@ -48,12 +45,12 @@ const router = createBrowserRouter(
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route exact path='/about' element={<About />} />
         <Route path='/empty-cart' element={<EmptyCart />} />
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
+        <Route path='/newpassword' element={<NewPassword />} />
         
 
         {/* Private Routes */}
         <Route element={<PrivateRoute />}>
-          <Route path='/forgotpassword' element={<ForgotPassword />} />
-          <Route path='/newpassword' element={<NewPassword />} />
           <Route path='/cart/:userId' element={<Cart />} />
           <Route path='/products' element={<Products />} />
           <Route path='/userprofile/:userId' element={<UserProfile />} />

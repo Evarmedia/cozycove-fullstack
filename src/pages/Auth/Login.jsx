@@ -157,7 +157,7 @@ const Login = () => {
               </Grid>
               <Grid item>
                 <Link
-                  to='/'
+                  to='/register'
                   variant='body2'
                   className='text-red-500 hover:text-gray-500'
                 >

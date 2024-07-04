@@ -68,7 +68,7 @@ const Mobilemenu = () => {
             <>
             <FaTimes className=" text-2xl bg-blue-300 rounded-md text-black" />
             <div
-            className='w-screen h-screen absolute -z-10 popup-overlay backdrop-blur-[1px]'
+            className='w-screen h-screen absolute -z-10 popup-overlay'
             // onClick={}
           ></div>
             </>

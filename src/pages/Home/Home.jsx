@@ -5,6 +5,7 @@ import Hero from "../Hero/Hero";
 import Products from "../ProductDetails/Products";
 import img1 from "../../assets/tmpAssets/child2.png";
 import img2 from "../../assets/tmpAssets/man2.png";
+import MobileSearchBar from "../Navbar/MobileSearchBar";
 
 const BannerData = {
   discount: "30% OFF",
@@ -46,10 +47,19 @@ const Home = () => {
 
   return (
     <main className='px-4 duration-200'>
+
+      <section className='p-2'>
+      <MobileSearchBar />
+      </section>
+
       <section className='hidden lg:block' data-aos='fade-in'>
         <Hero />
       </section>
+
+      <section className="mt-15">
       <Products />
+      </section>
+
       <section id="banner1" data-aos="fade-in">
         <Banner data={BannerData} />
       </section>

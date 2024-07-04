@@ -5,7 +5,6 @@ import { FaCaretDown } from "react-icons/fa6";
 import { MdPerson } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-import MobileSearchBar from "./MobileSearchBar";
 import Mobilemenu from "./Mobilemenu";
 import SearchBar from "./SearchBar";
 import logout from "../Auth/logout";
@@ -149,7 +148,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <div className='flex'>
-                    <NavLink to='login'>
+                    <NavLink to='/login'>
                       <button className='btn-primary'>Login</button>
                     </NavLink>
                     <NavLink to='/register'>
@@ -157,7 +156,7 @@ const Navbar = () => {
                     </NavLink>
                   </div>
 
-                  <button className=' hidden lg:block relative p-3'>
+                  <button className='hidden lg:block relative p-3'>
                     <NavLink to='/login'>
                       <AiOutlineShoppingCart className='text-2xl text-gray-600 dark:text-gray-400' />
                       <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>
@@ -168,7 +167,6 @@ const Navbar = () => {
                 </>
               )}
               {/* UserProfile */}
-
               <div className='p-2 absolute left-0 top-2'>
                 <Mobilemenu />
               </div>
@@ -176,7 +174,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <MobileSearchBar />
     </>
   );
 };
