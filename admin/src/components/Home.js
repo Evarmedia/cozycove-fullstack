@@ -21,6 +21,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const deployedUrl = "https://cozycove-node.onrender.com";
+
 
   const handleLogout = () => {
     try {
@@ -35,7 +37,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3005/api/product")
+      .get(`${deployedUrl}/api/product`)
       .then((res) => {
         setProducts(res.data.data);
         setLoading(false);
@@ -54,7 +56,7 @@ const Home = () => {
   const handleConfirmDelete = () => {
     axios
       .delete(
-        `http://localhost:3005/api/product/deleteproduct/${selectedProductId}`,
+        `${deployedUrl}/api/product/deleteproduct/${selectedProductId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -65,7 +67,7 @@ const Home = () => {
         setShowDeletePopup(false);
         toast.warning(res.data.message);
         axios
-          .get("http://localhost:3005/api/product")
+          .get(`${deployedUrl}/api/product`)
           .then((res) => {
             setProducts(res.data.data);
           })

@@ -46,6 +46,9 @@ const Signup = () => {
     // const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+    const deployedUrl = "https://cozycove-node.onrender.com";
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +65,7 @@ const Signup = () => {
       };
     //   setLoading(true)
       axios
-      .post("http://localhost:3005/api/auth/register", data)
+      .post(`${deployedUrl}/api/auth/register`, data)
       .then((res) => {
         toast.success(res.data.message);
         setFirstname("");

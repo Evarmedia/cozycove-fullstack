@@ -17,11 +17,14 @@ const EditProducts = () => {
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState("");
 
+  const deployedUrl = "https://cozycove-node.onrender.com";
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3005/api/product/${id}`)
+      .get(`${deployedUrl}/api/product/${id}`)
       .then((response) => {
         SetEditedProduct(response.data);
         setLoading(false);
@@ -48,7 +51,7 @@ const EditProducts = () => {
     setLoading(true);
 
     axios
-      .put(`http://localhost:3005/api/product/${id}`, updatedProduct, {
+      .put(`${deployedUrl}/api/product/${id}`, updatedProduct, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

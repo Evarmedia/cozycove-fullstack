@@ -8,11 +8,13 @@ const ShowProducts = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+  const deployedUrl = "https://cozycove-node.onrender.com";
+
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3005/api/product/${id}`)
+      .get(`${deployedUrl}/api/product/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);

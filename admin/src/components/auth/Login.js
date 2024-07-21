@@ -38,8 +38,11 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
+
+
 const defaultTheme = createTheme();
 
+const deployedUrl = "https://cozycove-node.onrender.com";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,7 +54,7 @@ const Login = () => {
     const data = { email, password };
 
     axios
-      .post("http://localhost:3005/api/auth/login", data)
+      .post(`${deployedUrl}/api/auth/login`, data)
       .then((res) => {
         // console.log(data);
         // console.log(res.data);

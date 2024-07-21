@@ -18,6 +18,9 @@ const CreateProducts = () => {
 
   const navigate = useNavigate();
 
+  const deployedUrl = "https://cozycove-node.onrender.com";
+
+
   const handleSaveBook = async () => {
     const token = localStorage.getItem("token");
     const formData = new FormData();
@@ -32,7 +35,7 @@ const CreateProducts = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:3005/api/product",
+        `${deployedUrl}/api/product`,
         formData,
         {
           headers: {
