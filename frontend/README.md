@@ -38,6 +38,14 @@ Mishak Mosimabale - Frontend && backend
 
 `cd cozycove-univelcity`
 
+### configure .env
+
+    VITE_DEPLOYED_URL=
+    OR
+    VITE_DEV_URL=
+
 `npm install`
 
 `npm run dev`
+
+

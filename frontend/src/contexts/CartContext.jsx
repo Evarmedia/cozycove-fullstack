@@ -15,8 +15,8 @@ export const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL; // to be used after deployment of backend/revert to localhost if during development
-
+  const deployedUrl = import.meta.env.VITE_DEPLOYED_URL;
+  
   // save cart to local storage
   const saveCartToStorage = (cartData) => {
     try {
